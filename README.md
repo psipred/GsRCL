@@ -44,6 +44,8 @@ Log-transform the input matrix without transposing it and use the Quake_Smart-se
 
 ``` bash
 python verify_hdf.py -i [INPUT FILE] -r Quake_Smart-seq2_Limb_Muscle -mp [PATH TO REFERENCE DIRECTORY] -t 0
+```
+``` bash
 python gsrcl_predict.py -r Quake_Smart-seq2_Limb_Muscle -mp [PATH TO REFERENCE DIRECTORY] --log 1 -t 0
 ```
 
@@ -53,6 +55,8 @@ Transpose the input matrix without log-transforming it and use the Adam referenc
 
 ``` bash
 python verify_hdf.py -i [INPUT FILE] -r Adam -mp [PATH TO REFERENCE DIRECTORY] -t 1
+```
+``` bash
 python gsrcl_predict.py -r Adam -mp [PATH TO REFERENCE DIRECTORY] -p 0.7 --log 0 -t 1
 ```
 
@@ -62,6 +66,8 @@ Same as Example 2 but set the output directory.
 
 ``` bash
 python verify_hdf.py -i [INPUT FILE] -o [PATH TO OUTPUT DIR] -r Adam -mp [PATH TO REFERENCE DIR] -t 1
+```
+``` bash
 python gsrcl_predict.py -o [PATH TO OUTPUT DIR] -r Adam -mp [PATH TO REFERENCE DIRECTORY] -p 0.7 --log 0 -t 1
 ```
 
@@ -71,6 +77,8 @@ Same as Example 3 but with providing the keys to the h5 objects in the tree, whe
 
 ``` bash
 python verify_hdf.py -i [INPUT FILE] -o [PATH TO OUTPUT DIR] -r Adam -mp [PATH TO REFERENCE DIR] -t 1 -mat exprs -obs obs_names -var var_names
+```
+``` bash
 python gsrcl_predict.py -o [PATH TO OUTPUT DIR] -r Adam -mp [PATH TO REFERENCE DIRECTORY] -p 0.7 --log 0 -t 1
 ```
 
@@ -80,6 +88,8 @@ Same as Example 4 but the required objects at depth 2 in the tree. The keys shou
 
 ``` bash
 python verify_hdf.py -i [INPUT FILE] -o [PATH TO OUTPUT DIR] -r Adam -mp [PATH TO REFERENCE DIR] -t 1 -mat X -obs obs barcode -var var feature_name
+```
+``` bash
 python gsrcl_predict.py -o [PATH TO OUTPUT DIR] -r Adam -mp [PATH TO REFERENCE DIRECTORY] -p 0.7 --log 0 -t 1
 ```
 
@@ -89,6 +99,8 @@ Same as Example 4 but the obs object at depth 2 and the var object at depth 3 in
 
 ``` bash
 python verify_hdf.py -i [INPUT FILE] -o [PATH TO OUTPUT DIR] -r Adam -mp [PATH TO REFERENCE DIR] -t 1 -mat matrix -obs matrix barcodes -var matrix features id
+```
+``` bash
 python gsrcl_predict.py -o [PATH TO OUTPUT DIR] -r Adam -mp [PATH TO REFERENCE DIRECTORY] -p 0.7 --log 0 -t 1
 ```
 
