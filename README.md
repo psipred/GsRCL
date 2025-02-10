@@ -183,7 +183,7 @@ None of the query genes match the selected reference, where the reference’s or
 
 Case 1: Try to read the file without setting the optional arguments.
 
-````
+``` bash
 python verify_hdf.py -i …/sample2.py -r Quake_Smart-seq2_Limb_Muscle -mp [PATH TO 
 REFERENCE DIRECTORY] -t 0
 ```
@@ -202,3 +202,5 @@ TBC
 Case 3: Try to obtain the probabilities but with setting the p-value to 0.9 following scPred.
 
 Output:
+
+TBC
