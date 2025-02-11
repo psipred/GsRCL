@@ -159,7 +159,7 @@ TBC
 Case 2: Based on the printed tree, provide space delimited keys for the -obs and -var arguments. 
 
 ``` bash
-python verify_hdf.py -i …/sample1.py -r Quake_Smart-seq2_Limb_Muscle -mp [PATH TO REFERENCE DIRECTORY] -t 0 -obs matrix barcodes -var matrix features name
+python verify_hdf.py -i …/sample1.py -r Quake_Smart-seq2_Limb_Muscle -mp ./data/-t 0 -obs matrix barcodes -var matrix features name
 ```
 
 Output:
@@ -169,7 +169,7 @@ TBC
 Case 3: Based on the error message, the name object has duplicates, hence we replace it with the id object
 
 ``` bash
-python verify_hdf.py -i …/sample1.py -r Quake_Smart-seq2_Limb_Muscle -mp [PATH TO REFERENCE DIRECTORY] -t 0 -obs matrix barcodes -var matrix features id
+python verify_hdf.py -i …/sample1.py -r Quake_Smart-seq2_Limb_Muscle -mp ./data/ -t 0 -obs matrix barcodes -var matrix features id
 ```
 
 Output:
@@ -184,8 +184,7 @@ None of the query genes match the selected reference, where the reference’s or
 Case 1: Try to read the file without setting the optional arguments.
 
 ``` bash
-python verify_hdf.py -i …/sample2.py -r Quake_Smart-seq2_Limb_Muscle -mp [PATH TO 
-REFERENCE DIRECTORY] -t 0
+python verify_hdf.py -i …/sample2.py -r Quake_Smart-seq2_Limb_Muscle -mp ./data/ -t 0
 ```
 
 Output:
@@ -195,6 +194,10 @@ The file verified successfully.
 ```
 
 Case2: Try to obtain the probabilities without setting the p-value.
+
+``` bash
+python .verify_hdf.py -i ./sample2.h5 -r Quake_Smart-seq2_Limb_Muscle -mp ./data/ -t 0 -obs obs cell_type1 -var var_names
+```
 Output:
 
 TBC
