@@ -147,9 +147,9 @@ def main(args):
         results.to_csv(Path(args.output, 'probabilities.csv'))
         plot(args, mat, results)
 
-    except:
+    except Exception as e:
         print(
-            f'Error 140: Server error'
+            f'Error 140: predict error: {e}'
         )
         sys.exit(140)   
 

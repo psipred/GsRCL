@@ -6,6 +6,7 @@ import h5py
 import scipy as sp
 import numpy as np
 import pandas as pd
+import magic
 
 
 def h5_tree(val, pre='', out=''):
@@ -44,11 +45,12 @@ def get_obj(f, keys):
 
 def verify(args):     
     # Verify file format
-    file_ext = args.input.endswith('.h5') or args.input.endswith('.h5ad')
-    if not file_ext:
+    # DB: should return file output rather than care about ending
+
+    if 'Hierarchical Data Format (version 5) data' in magic.from_file('args.input'):
         print(
             f"Error 128: The input file format ({args.input.split('.')[1]}) is invalid." \
-            ' Please upload hdf5 files (e.g. ***.h5 or ***.h5ad).'
+            ' Please upload hdf5 file.'
         )
         sys.exit(128)
 
