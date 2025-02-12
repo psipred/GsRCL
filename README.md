@@ -198,11 +198,25 @@ Case2: Try to obtain the probabilities without setting the p-value.
 ``` bash
 python .verify_hdf.py -i ./sample2.h5 -r Quake_Smart-seq2_Limb_Muscle -mp ./data/ -t 0 -obs obs cell_type1 -var var_names
 ```
+
+``` bash
+python ./src/gsrcl_predict.py -o ./ -r Quake_Smart-seq2_Limb_Muscle -mp ./data/ -p 0.7 --log 0 -t 0
+```
+
 Output:
 
 TBC
 
 Case 3: Try to obtain the probabilities but with setting the p-value to 0.9 following scPred.
+
+``` bash
+python .verify_hdf.py -i ./sample2.h5 -r Quake_Smart-seq2_Limb_Muscle -mp ./data/ -t 0 -obs obs cell_type1 -var var_names
+```
+
+``` bash
+python ./src/gsrcl_predict.py -o ./ -r Quake_Smart-seq2_Limb_Muscle -mp ./data/ -p 0.9 --log 0 -t 0
+```
+
 
 Output:
 
