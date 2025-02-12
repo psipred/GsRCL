@@ -196,12 +196,16 @@ The file verified successfully.
 Case2: Try to obtain the probabilities without setting the p-value.
 
 ``` bash
-python .verify_hdf.py -i ./sample2.h5 -r Quake_Smart-seq2_Limb_Muscle -mp ./data/ -t 0 -obs obs cell_type1 -var var_names
+python ./src/verify_hdf.py -i ./sample2.h5 -r Quake_Smart-seq2_Limb_Muscle -mp ./data/ -t 0 -obs obs cell_type1 -var var_names
 ```
+
+On success verify_hdf should produce several .npy files; match.npy, mat.npy, obs.npy, var.npy
 
 ``` bash
 python ./src/gsrcl_predict.py -o ./ -r Quake_Smart-seq2_Limb_Muscle -mp ./data/ -p 0.7 --log 0 -t 0
 ```
+
+On success you should see a file of cell type probabilities (probabilities.csv) and an image of the clustering (tsne.svg and legend.txt)
 
 Output:
 
