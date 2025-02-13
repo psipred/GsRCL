@@ -46,8 +46,9 @@ def get_obj(f, keys):
 def verify(args):     
     # Verify file format
     # DB: should return file output rather than care about ending
-
-    if 'Hierarchical Data Format (version 5) data' in magic.from_file('args.input'):
+    # print(magic.from_file(args.input))
+    test_str = magic.from_file(args.input)
+    if 'Hierarchical Data Format (version 5) data' not in test_str:
         print(
             f"Error 128: The input file format ({args.input.split('.')[1]}) is invalid." \
             ' Please upload hdf5 file.'
