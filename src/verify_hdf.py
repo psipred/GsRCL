@@ -58,6 +58,7 @@ def verify(args):
     with h5py.File(args.input, mode='r') as f:
         keys = list(f.keys())
         tree = h5_tree(f)
+
         if len(keys) == 0:
             print(
                 "Error 129: Faild to read the input file. The input file hierarchy doesn't include any objects (keys)."
@@ -100,7 +101,7 @@ def verify(args):
                         var = np.array(f[var_key1][var_key2], dtype=str)
                 except:
                     print(
-                        "Error 132: Faild to read the var object, the input file hierarchy doesn't include" \
+                        "Error 132: Failed to read the var object, the input file hierarchy doesn't include" \
                         ' any of the default objects (e.g. var_names, var -> feature_name, or var -> _index).' \
                         ' Please provide the correct HDF5 object names (keys) by setting the argument -var'
                     )
@@ -129,7 +130,7 @@ def verify(args):
                         obs = np.array(f[obs_key1][obs_key2], dtype=str)
                 except:
                     print(
-                        "Error 134: Faild to read the obs object, the input file hierarchy doesn't include" \
+                        "Error 134: Failed to read the obs object, the input file hierarchy doesn't include" \
                         ' any of the default objects (e.g. obs_names, barcodes, obs -> barcode, or obs -> _index).' \
                         ' Please provide the correct HDF5 object names (keys) by setting the argument -obs'
                     )
@@ -150,6 +151,7 @@ def verify(args):
             # Verify mat object
             if args.mat_obj is None:
                 mat_key = 'exprs' if 'exprs' in f.keys() else 'matrix' if 'matrix' in f.keys() else 'X'
+                
                 try:
                     if isinstance(f[mat_key], h5py.Group):
                         try:
@@ -160,11 +162,11 @@ def verify(args):
                         mat = np.array(mat.toarray(), dtype=np.float32)
                     else:
                         mat = np.array(f[mat_key], dtype=np.float32)
-                except:
+                except Exception as e:
                     print(
-                        "Error 136: Faild to read the mat object, the input file hierarchy doesn't include" \
+                        "Error 136: Failed to read the mat object, the input file hierarchy doesn't include" \
                         ' any of the default objects (e.g. exprs or X).' \
-                        ' Please provide the correct HDF5 object name (key) by setting the argument -mat'
+                        ' Please provide the correct HDF5 object name (key) by setting the argument -mat' + e
                     )
                     print('input structure' + '\n' + tree)
                     sys.exit(136)
