@@ -18,7 +18,7 @@ def verify(args):
 
     if input.shape[0] > 1000:
         print(
-            'Error 128: The genes experssion matrix should include no more than 1000 rows (i.e. cells),' \
+            'Error 128: The genes expression matrix should include no more than 1000 rows (i.e. cells),' \
             f' while the given matrix inlcudes {count} rows.'
         )
         sys.exit(128) 
@@ -29,7 +29,7 @@ def verify(args):
 
     if genes_experssion_mat.shape[0] > genes_experssion_mat.shape[1]:
         print(
-            'Error 128: The genes experssion matrix topology should be cells x genes, where' \
+            'Error 128: The genes expression matrix topology should be cells x genes, where' \
             ' cells denote rows and genes denote columns. And there are more columns than genes'
         )
         sys.exit(128)
