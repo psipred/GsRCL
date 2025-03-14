@@ -29,8 +29,8 @@ def verify(args):
 
     if genes_experssion_mat.shape[0] > genes_experssion_mat.shape[1]:
         print(
-            'Error 128: The genes expression matrix topology should be cells (rows) by genes (columns), where' \
-            ' cells denote rows and genes denote columns. There must be more columns than genes to analyse the data' 
+            'Error 128: The genes expression matrix topology should be cell IDs (rows) by genes (columns). ' \
+            'There must be more columns than genes to analyse the data' 
         )
         sys.exit(128)
 
