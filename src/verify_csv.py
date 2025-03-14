@@ -7,34 +7,22 @@ import numpy as np
 import pandas as pd
 
 
-def get_num_rows(args):
-    count = 0
-    with open(args.input, 'r') as file:
-        reader = csv.reader(file)
-        _ = reader.__next__()
-        for row in reader:
-            count += 1
-
-    return count
-
-
 def verify(args):
-    fmt = Path(args.input).suffix
-    if fmt != '.csv':
+    try:
+        input = pd.read_csv(args.input, header=0, index_col=0)
+    except:
         print(
-            f'Error 128: The input file should be of type .csv, while the input file of type {fmt}'
+            f'Error 128: The input file could not be read as csv by pandas'
         )
         sys.exit(128)
 
-    count = get_num_rows(args)
-    if count > 1000:
+    if input.shape[0] > 1000:
         print(
             'Error 128: The genes experssion matrix should include no more than 1000 rows (i.e. cells),' \
             f' while the given matrix inlcudes {count} rows.'
         )
         sys.exit(128) 
 
-    input = pd.read_csv(args.input, header=0, index_col=0)
     query_genes = input.columns.to_numpy().flatten()
     query_barcodes = input.index.to_numpy().flatten()
     genes_experssion_mat = input.to_numpy()
@@ -42,13 +30,13 @@ def verify(args):
     if genes_experssion_mat.shape[0] > genes_experssion_mat.shape[1]:
         print(
             'Error 128: The genes experssion matrix topology should be cells x genes, where' \
-            ' cells denote rows and genes denote columns.'
+            ' cells denote rows and genes denote columns. And there are more columns than genes'
         )
         sys.exit(128)
 
     if not query_genes.dtype == 'object':
         print(
-            'Error 128: The input csv file header should contain gene ids,' \
+            'Error 128: The input csv file header should contain gene ids as strings,' \
             f' while the given file header includes {query_genes[:5]}.'
         )
         sys.exit(128)
@@ -61,7 +49,7 @@ def verify(args):
 
     if not query_barcodes.dtype == 'object':
         print(
-            'Error 128: The input csv file rows should start with cell barcodes,' \
+            'Error 128: The input csv file rows should start with cell type barcodes as strings,' \
             f' while the given file rows start with {query_barcodes[:5]}.'
         )
         sys.exit(128)
