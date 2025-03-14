@@ -87,7 +87,7 @@ def format_results(args, results, query_barcodes):
     sum = df.sum(axis=1)
     df = df.div(sum, axis=0)
     preds = df.to_numpy().argmax(axis=1)
-    mask = df.to_numpy().max(axis=1) <= args.p_value
+    mask = df.to_numpy().max(axis=1) <= args.prob_cutoff
 
     df['preds'] = [df.columns[p] for p in preds]
     df['Identified as'] = df['preds'].where(~mask, other='Unassigned')
@@ -172,9 +172,9 @@ def main(args):
         results.to_csv(Path(args.output, 'probabilities.csv'))
         plot(args, mat.detach().numpy(), results)
 
-    except:
+    except Exception as e:
        print(
-           f'Error 135: Server error'
+           f'Error 135: Server error: {e}'
        )
        sys.exit(135)   
 
