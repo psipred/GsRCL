@@ -15,6 +15,18 @@ def verify(args):
             f'Error 128: The input file could not be read as csv by pandas'
         )
         sys.exit(128)
+    
+    typeset = set()
+    for type in input.dtypes:
+        typeset.add(f"{type}")
+    print(typeset)
+    if len(typeset) != 1:
+        print('Error 128: Input data has both integer and float values. Please ensure this is integer count data or log transformed data?')
+        sys.exit(128
+
+    #LOG TEST
+    #IF LOG = True then values MUST be floats
+    #IF LOG = False values must be counts
 
     if input.shape[0] > 1000:
         print(
