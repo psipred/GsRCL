@@ -19,14 +19,19 @@ def verify(args):
     typeset = set()
     for type in input.dtypes:
         typeset.add(f"{type}")
-    print(typeset)
     if len(typeset) != 1:
-        print('Error 128: Input data has both integer and float values. Please ensure this is integer count data or log transformed data?')
-        sys.exit(128
+        print('Error 128: Input data has both integer and float values. Please ensure data are either integer count data or log transformed data')
+        sys.exit(128)
 
     #LOG TEST
-    #IF LOG = True then values MUST be floats
-    #IF LOG = False values must be counts
+    if args.log == 1:
+        if "int64" not in list(typeset)[0]:
+            print('Error 128: Data already appear to be log transformed. Please unselect this option and submit again')
+            sys.exit(128) 
+    else: 
+        if "float64" not in list(typeset)[0]:
+            print('Error 128: Data appears to contain only integers, this is likely raw count data. Please select the log transform option and submit again')
+            sys.exit(128) 
 
     if input.shape[0] > 1000:
         print(
@@ -89,6 +94,7 @@ if __name__ == '__main__':
     parser.add_argument('-o', '--output', default='.', help='the full path to the output directory', required=True)
     parser.add_argument('-r', '--reference', help='the name of the reference dataset', required=True)
     parser.add_argument('-mp', '--model_path', help='the path to the reference models and the set of reference genes', required=True)
+    parser.add_argument('-l', '--log',  type=int, default=1, help='log transform the input matrix if it contains raw counts', required=True)
 
     args = parser.parse_args()
     verify(args)
