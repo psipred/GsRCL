@@ -35,7 +35,7 @@ def verify(args):
 
     if input.shape[0] > 1000:
         print(
-            'Error 128: The genes expression matrix should include no more than 1000 rows (i.e. cells),' \
+            'Error 128: The gene expression matrix should include no more than 1000 rows (i.e. cells),' \
             ' while the given matrix inlcudes {count} rows.'
         )
         sys.exit(128) 
@@ -46,8 +46,8 @@ def verify(args):
 
     if genes_experssion_mat.shape[0] > genes_experssion_mat.shape[1]:
         print(
-            'Error 128: The genes expression matrix topology should be cell IDs (rows) by genes (columns). ' \
-            'There must be more columns than genes to analyse the data' 
+            'Error 128: The gene expression matrix topology should be cell IDs (rows) by genes (columns). ' \
+            'There must be more columns than rows to analyse the data' 
         )
         sys.exit(128)
 
@@ -67,7 +67,7 @@ def verify(args):
     if not query_barcodes.dtype == 'object':
         print(
             f'Error 128: The input csv file rows should start with cell type barcodes as strings,' \
-            ' while the given file rows start with {query_barcodes[:5]}.'
+            f' while the given file rows start with {query_barcodes[:5]}.'
         )
         sys.exit(128)
 
