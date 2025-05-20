@@ -3,6 +3,7 @@ import os
 import joblib
 import argparse
 from pathlib import Path
+import glob
 
 import torch
 import numpy as np
@@ -19,10 +20,15 @@ from gsrcl_networks import Encoder
 
 
 def load_files(args):
-    mat = np.load(Path(args.output, 'mat.npy'), allow_pickle=True)
-    query_barcodes = np.load(Path(args.output, 'query_barcodes.npy'), allow_pickle=True)
-    query_genes = np.load(Path(args.output, 'query_genes.npy'), allow_pickle=True)
-    matched_genes_mask = np.load(Path(args.output, 'matched_genes_mask.npy'), allow_pickle=True)
+    mat_file = glob.glob('mat*.npy')[0];
+    barcode_file = glob.glob('query_barcode*.npy')[0];
+    genes_file = glob.glob('query_genes*.npy')[0];
+    matched_file = glob.glob('matched_genes_mask*.npy')[0];
+    
+    mat = np.load(Path(args.output, mat_file), allow_pickle=True)
+    query_barcodes = np.load(Path(args.output, barcode_file), allow_pickle=True)
+    query_genes = np.load(Path(args.output, genes_file), allow_pickle=True)
+    matched_genes_mask = np.load(Path(args.output, matched_file), allow_pickle=True)
 
     return mat, query_barcodes, query_genes, matched_genes_mask
 
