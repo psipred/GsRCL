@@ -29,7 +29,7 @@ def verify(args):
                     else:
                         #check the other values for decimals. If we find one then raise an error
                         if "." in value:
-                            print(f'Error 128: Float found in integer only file')
+                            print(f'Error 128: Float found in integer only file {value}')
                             sys.exit(128)                    
                 else:
                     # if the user has told us the file is logs values make sure all the zeroes are
@@ -37,13 +37,13 @@ def verify(args):
                         entries[i] = "0.0"
                     else:
                         #check the other values for decimals. If we find one then raise an error
-                        if "." in value:
-                            print(f'Error 128: integer found in float only file')
+                        if "." not in value:
+                            print(f'Error 128: integer found in float only file {value}')
                             sys.exit(128)   
             data_line = ','.join(entries)
             input_data.write(data_line+"\n")
     input_data.seek(0)
-    # print("hi")
+    
     try:
         input = pd.read_csv(input_data, header=0, index_col=0)
     except:

@@ -1,5 +1,0 @@
-sample1_error.csv - too many rows (1001) to verify
-sample2_error.csv - rows do not have text labels
-sample3_error.csv - data geometry is incorrect. There must be more measurements (columns) than there are samples (rows)
-sample4_error.csv - The named genes (columns) can not be found in the reference data
-sample5_error.csv - some zeroes are listed as 0.0 rather than 0 in this counts file
