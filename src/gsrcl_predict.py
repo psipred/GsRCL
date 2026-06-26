@@ -20,10 +20,10 @@ from gsrcl_networks import Encoder
 
 
 def load_files(args):
-    mat_file = glob.glob('mat*.npy')[0];
-    barcode_file = glob.glob('query_barcode*.npy')[0];
-    genes_file = glob.glob('query_genes*.npy')[0];
-    matched_file = glob.glob('matched_genes_mask*.npy')[0];
+    mat_file = glob.glob('mat*.npy')[0]
+    barcode_file = glob.glob('query_barcode*.npy')[0]
+    genes_file = glob.glob('query_genes*.npy')[0]
+    matched_file = glob.glob('matched_genes_mask*.npy')[0]
     
     mat = np.load(Path(args.output, mat_file), allow_pickle=True)
     query_barcodes = np.load(Path(args.output, barcode_file), allow_pickle=True)

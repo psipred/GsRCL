@@ -5,20 +5,59 @@ from pathlib import Path
 import csv
 import numpy as np
 import pandas as pd
-
+import io
+import re
 
 def verify(args):
+
+    # here we handle the case were zeroes should be whatever format the user
+    # tells us so the pandas auto casting isn't confused
+    input_data = io.StringIO('')
+    with open(args.input, "r", encoding="utf-8") as fh:
+        input_data.write(next(fh))
+        datareader = csv.reader(fh, delimiter=",")
+        zero_pattern = re.compile("^0\.0+$")
+        for entries in datareader:
+            id = entries[0]
+            for i, value in enumerate(entries):
+                if i == 0:
+                    continue
+                # if the user has told us to log the data then find any float zeroes and make them int strings
+                if args.log == 1:
+                    if zero_pattern.match(value):
+                        entries[i] = "0"
+                    else:
+                        #check the other values for decimals. If we find one then raise an error
+                        if "." in value:
+                            print(f'Error 128: Float found in integer only file')
+                            sys.exit(128)                    
+                else:
+                    # if the user has told us the file is logs values make sure all the zeroes are
+                    if value == "0":
+                        entries[i] = "0.0"
+                    else:
+                        #check the other values for decimals. If we find one then raise an error
+                        if "." in value:
+                            print(f'Error 128: integer found in float only file')
+                            sys.exit(128)   
+            data_line = ','.join(entries)
+            input_data.write(data_line+"\n")
+    input_data.seek(0)
+    # print("hi")
     try:
-        input = pd.read_csv(args.input, header=0, index_col=0)
+        input = pd.read_csv(input_data, header=0, index_col=0)
     except:
         print(
             f'Error 128: The input file could not be read as csv by pandas'
         )
         sys.exit(128)
     
+    print(input)
+
     typeset = set()
     for type in input.dtypes:
         typeset.add(f"{type}")
+    print(typeset)
     if len(typeset) != 1:
         print('Error 128: Input data has both integer and float values. Please ensure data are either integer count data or log transformed data')
         sys.exit(128)
@@ -36,7 +75,7 @@ def verify(args):
     if input.shape[0] > 1000:
         print(
             'Error 128: The gene expression matrix should include no more than 1000 rows (i.e. cells),' \
-            ' while the given matrix inlcudes {count} rows.'
+            f' while the given matrix inlcudes {input.shape[0]} rows.'
         )
         sys.exit(128) 
 
